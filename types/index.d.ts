@@ -49,6 +49,9 @@ export interface BaseSchema<T = unknown> {
   notOneOf(values: readonly T[], options?: TestOptions): this;
   regex(pattern: RegExp, options?: TestOptions): this;
   email(options?: TestOptions): this;
+  positive(options?: TestOptions): this;
+  min(limit: number, options?: TestOptions): this;
+  max(limit: number, options?: TestOptions): this;
   addTest(name: string, fn: TestFunction<T>, options?: TestOptions): this;
   validate(value: unknown, data?: Record<string, unknown>): Promise<T | null | undefined>;
   toJsonSchema(): JsonSchema;

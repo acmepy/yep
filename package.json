@@ -1,6 +1,6 @@
 {
   "name": "yep",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple librería de validación asíncrona para JavaScript moderno.",
   "type": "module",
   "main": "./yep/index.js",

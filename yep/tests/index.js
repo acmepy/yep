@@ -6,8 +6,11 @@ import Regex from './regex.js';
 import RequiredOneOf from './requiredOneOf.js';
 import Custom from './custom.js';
 import Email from './email.js';
+import Positive from './positive.js';
+import Min from './min.js';
+import Max from './max.js';
 
-export { Required, Nullable, OneOf, NotOneOf, Regex, RequiredOneOf, Custom, Email };
+export { Required, Nullable, OneOf, NotOneOf, Regex, RequiredOneOf, Custom, Email, Positive, Min, Max };
 
 export const schemaTests = [
   {
@@ -45,7 +48,10 @@ export const schemaTests = [
       schema.regexPattern = pattern;
     }
   },
-  { name: 'email', Test: Email }
+  { name: 'email', Test: Email },
+  { name: 'positive', Test: Positive },
+  { name: 'min', Test: Min },
+  { name: 'max', Test: Max }
 ];
 
 export default schemaTests;

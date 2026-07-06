@@ -52,6 +52,9 @@ Los tipos de campo comparten estos métodos encadenables:
 - `.notOneOf(valores)`: rechaza los valores indicados.
 - `.regex(expresion)`: valida el valor con una expresión regular.
 - `.email()`: valida un formato básico de correo electrónico.
+- `.positive()`: acepta únicamente números mayores que `0`.
+- `.min(límite)`: exige un número mayor al límite o un texto con más caracteres que el límite.
+- `.max(límite)`: exige un número menor al límite o un texto con menos caracteres que el límite.
 
 Las validaciones son asíncronas, por lo que `validate` y `validateAt` siempre deben usarse con `await`.
 

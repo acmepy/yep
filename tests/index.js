@@ -7,3 +7,5 @@ import './allErrors.js';
 import './safeMode.js';
 import './email.js';
 import './jsonSchema.js';
+import './positive.js';
+import './minMax.js';

@@ -6,6 +6,13 @@ const messages = {
   notOneOf: ({ label }) => `${label} no puede ser uno de los valores permitidos`,
   requiredOneOf: ({ labels }) => `Debe completar al menos uno de los campos: ${labels.join(', ')}`,
   regex: ({ label }) => `${label} no cumple con el formato esperado`,
+  positive: ({ label }) => `${label} debe ser un número mayor a 0`,
+  min: ({ label, min, typeName }) => typeName === 'string'
+    ? `${label} debe tener más de ${min} caracteres`
+    : `${label} debe ser mayor a ${min}`,
+  max: ({ label, max, typeName }) => typeName === 'string'
+    ? `${label} debe tener menos de ${max} caracteres`
+    : `${label} debe ser menor a ${max}`,
   default: ({ label }) => `${label} se completó con un valor por defecto`,
   custom: ({ label }) => `${label} no es válido`
 };
