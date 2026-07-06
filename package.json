@@ -1,0 +1,20 @@
+{
+  "name": "yep",
+  "version": "1.0.0",
+  "description": "Simple librería de validación asíncrona para JavaScript moderno.",
+  "type": "module",
+  "main": "./yep/index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./yep/index.js",
+      "default": "./yep/index.js"
+    }
+  },
+  "license":"MIT",
+  "scripts": {
+    "test": "node --test tests/index.js",
+    "usage":"cd ./examples && node usage.js"
+  }
+}
