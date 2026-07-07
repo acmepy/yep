@@ -3,13 +3,19 @@
 Yep es una pequeña librería de validación asíncrona para JavaScript moderno. Está inspirada en Yup y busca ofrecer una API encadenable, sin dependencias externas y fácil de extender.
 
 > Estado actual: versión `0.1.0`, escrita como módulos ES (`"type": "module"`).
+## Instalación
 
+Instala la librería directamente desde GitHub:
+
+```bash
+npm install yep@github:acmepy/yep
+```
 ## Uso
 
 El proyecto todavía no define un punto de entrada publicable en `package.json`. Desde este repositorio se importa directamente el módulo principal:
 
 ```js
-import yep from './yep/index.js';
+import yep from 'yep';
 
 const usuarioSchema = yep.object({
   nombre: yep.string().label('Nombre').required(),
