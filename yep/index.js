@@ -1,8 +1,9 @@
 import ObjectSchema from './core/ObjectSchema.js';
 import BaseType from './core/BaseType.js';
+import BaseTest from './core/BaseTest.js';
 import { registerType, registerTest } from './core/registry.js';
 import types, { createType } from './types/index.js';
-import { schemaTests } from './tests/index.js';
+import * as tests from './tests/index.js';
 import { fromJsonSchema } from './json-schema/fromJsonSchema.js';
 import { toJsonSchema } from './json-schema/toJsonSchema.js';
 
@@ -45,12 +46,21 @@ const yep = {
   }
 };
 
-for (const { name, Test, configure } of schemaTests) {
-  BaseType.prototype[name] = function (...args) {
-    configure?.(this, ...args);
-    this.tests.push(new Test(...args));
-    return this;
-  };
+for (const Test of Object.values(tests)) {
+  if (typeof Test !== 'function'
+    || !(Test.prototype instanceof BaseTest)
+    || Test.schemaMethod === false) {
+    continue;
+  }
+
+  const names = [new Test().name, ...(Test.aliases || [])];
+  for (const name of names) {
+    BaseType.prototype[name] = function (...args) {
+      Test.configure?.(this, ...args);
+      this.tests.push(new Test(...args));
+      return this;
+    };
+  }
 }
 
 for (const type of types) {

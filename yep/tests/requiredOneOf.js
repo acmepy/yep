@@ -1,7 +1,9 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class RequiredOneOfTest extends BaseTest {
+export class RequiredOneOf extends BaseTest {
+  static schemaMethod = false;
+
   constructor(fields, options = {}) {
     super('requiredOneOf', options);
     this.fields = fields;

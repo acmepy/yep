@@ -2,7 +2,9 @@ import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 import { getTest } from '../core/registry.js';
 
-export default class CustomTest extends BaseTest {
+export class Custom extends BaseTest {
+  static schemaMethod = false;
+
   constructor(name, fn, options = {}) {
     super(name, options);
     this.fn = fn;

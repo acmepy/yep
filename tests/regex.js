@@ -24,3 +24,21 @@ test('regex rejects invalid pattern', async () => {
     }
   );
 });
+
+test('matches validates using a regular expression', async () => {
+  const schema = yep.string()
+    .label('Teléfono')
+    .matches(/^\d{3}-\d{3}-\d{4}$/)
+    .nullable();
+
+  assert.equal(await schema.validate('123-456-7890'), '123-456-7890');
+  assert.equal(await schema.validate(null), null);
+
+  await assert.rejects(
+    () => schema.validate('1234'),
+    (error) => {
+      assert.equal(error.message, 'Teléfono no cumple con el formato esperado');
+      return true;
+    }
+  );
+});

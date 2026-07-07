@@ -1,7 +1,7 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class PositiveTest extends BaseTest {
+export class Positive extends BaseTest {
   constructor(options = {}) {
     super('positive', options);
   }

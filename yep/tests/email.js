@@ -1,7 +1,7 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class Email extends BaseTest {
+export class Email extends BaseTest {
   constructor(options = {}) {
     super('email', options);
   }

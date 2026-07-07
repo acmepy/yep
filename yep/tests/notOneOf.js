@@ -1,7 +1,11 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class NotOneOfTest extends BaseTest {
+export class NotOneOf extends BaseTest {
+  static configure(schema, values) {
+    schema.notOneOfValues = values;
+  }
+
   constructor(values, options = {}) {
     super('notOneOf', options);
     this.values = values;

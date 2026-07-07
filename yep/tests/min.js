@@ -1,7 +1,7 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class MinTest extends BaseTest {
+export class Min extends BaseTest {
   constructor(limit, options = {}) {
     super('min', options);
     this.limit = limit;

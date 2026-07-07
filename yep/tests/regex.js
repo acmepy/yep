@@ -1,7 +1,13 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class RegexTest extends BaseTest {
+export class Regex extends BaseTest {
+  static aliases = ['matches'];
+
+  static configure(schema, pattern) {
+    schema.regexPattern = pattern;
+  }
+
   constructor(pattern, options = {}) {
     super('regex', options);
     this.pattern = pattern;

@@ -1,6 +1,10 @@
 import BaseTest from '../core/BaseTest.js';
 
-export default class NullableTest extends BaseTest {
+export class Nullable extends BaseTest {
+  static configure(schema) {
+    schema.nullableFlag = true;
+  }
+
   constructor(options = {}) {
     super('nullable', options);
   }

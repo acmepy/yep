@@ -1,7 +1,7 @@
 {
   "name": "yep",
-  "version": "1.0.1",
-  "description": "Simple librería de validación asíncrona para JavaScript moderno.",
+  "version": "1.0.2",
+  "description": "Librería de validación asíncrona para JavaScript.",
   "type": "module",
   "main": "./yep/index.js",
   "types": "./types/index.d.ts",

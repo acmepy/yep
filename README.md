@@ -51,6 +51,7 @@ Los tipos de campo comparten estos métodos encadenables:
 - `.oneOf(valores)`: acepta únicamente los valores indicados.
 - `.notOneOf(valores)`: rechaza los valores indicados.
 - `.regex(expresion)`: valida el valor con una expresión regular.
+- `.matches(expresion)`: alias de `.regex()`.
 - `.email()`: valida un formato básico de correo electrónico.
 - `.positive()`: acepta únicamente números mayores que `0`.
 - `.min(límite)`: exige un número mayor al límite o un texto con más caracteres que el límite.

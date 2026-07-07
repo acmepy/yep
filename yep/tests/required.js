@@ -1,7 +1,11 @@
 import BaseTest from '../core/BaseTest.js';
 import { getMessage } from '../errors/messages.js';
 
-export default class RequiredTest extends BaseTest {
+export class Required extends BaseTest {
+  static configure(schema) {
+    schema.requiredFlag = true;
+  }
+
   constructor(options = {}) {
     super('required', options);
   }
