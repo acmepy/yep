@@ -1,4 +1,4 @@
-import yep from '../yep/index.js';
+import yep from 'yep';
 
 const schema = yep.object().shape({
   nombre: yep.string().label('Nombre').required(),
