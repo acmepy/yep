@@ -130,6 +130,17 @@ const contactoSchema = yep.object({
 }).requiredOneOf(['email', 'telefono']);
 
 await contactoSchema.validate({ telefono: '0981000000' });
+
+const resultado = await contactoSchema.validate({}, { safe: true });
+
+console.log(resultado);
+// {
+//   message: 'Se ha producido 1 error',
+//   errors: {
+//     email: 'Debe completar al menos uno de los campos: Correo, Teléfono'
+//     telefono: 'Debe completar al menos uno de los campos: Correo, Teléfono'
+//   }
+// }
 ```
 
 La regla considera vacío un valor `undefined`, `null` o `''`. Si ninguno está presente, el error se asigna al primer campo de la lista.

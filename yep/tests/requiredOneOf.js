@@ -13,7 +13,11 @@ export class RequiredOneOf extends BaseTest {
     const hasAny = this.fields.some((field) => data[field] !== undefined && data[field] !== null && data[field] !== '');
     if (!hasAny) {
       const labels = this.fields.map((field) => schema?.shapeDefinition?.[field]?.getLabel?.() || field);
-      return { message: getMessage('requiredOneOf', { labels }), fieldName: this.fields[0] };
+      return {
+        message: getMessage('requiredOneOf', { labels }),
+        fieldName: this.fields[0],
+        fieldNames: this.fields
+      };
     }
     return null;
   }

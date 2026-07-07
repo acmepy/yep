@@ -62,7 +62,15 @@ export default class ObjectSchema {
       for (const test of this.tests) {
         const result = await test.run(undefined, this, data);
         if (result) {
-          errors[result.fieldName] = result.message;
+          const fieldNames = Array.isArray(result.fieldNames)
+            ? result.fieldNames
+            : [result.fieldName];
+
+          for (const fieldName of fieldNames) {
+            if (fieldName) {
+              errors[fieldName] = result.message;
+            }
+          }
         }
       }
     }

@@ -37,3 +37,11 @@ const rucSchema = yep.object().shape({
 });
 
 console.log(11, await rucSchema.validate({ ruc: '123' }, {safe: true}));
+
+const contactSchema = yep.object({
+  email: yep.string().label('Correo electrónico').email(),
+  phone: yep.string().label('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/)
+}).requiredOneOf(['email', 'phone']);
+
+console.log(12, await contactSchema.validate({ phone: '123-456-7890' }));
+console.log(13, await contactSchema.validate({}, { safe: true }));
