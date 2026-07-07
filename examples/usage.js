@@ -1,7 +1,7 @@
 import yep from 'yep';
 
 const schema = yep.object().shape({
-  nombre: yep.string().label('Nombre').required(),
+  nombre: yep.string().label('Nombre').required().min(5).max(20),
   edad: yep.number().label('Edad').required().positive().min(10).max(50),
   email: yep.string().email().label('Correo electrónico').nullable(),
   phone: yep.string().label('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/).nullable(),

@@ -5,30 +5,71 @@ import yep from '../yep/index.js';
 test('min and max use numeric values for number schemas', async () => {
   const schema = yep.number().label('Edad').min(0).max(10);
 
-  assert.equal(await schema.validate(5), 5);
-
-  for (const value of [0, 10, -1, 11]) {
-    await assert.rejects(() => schema.validate(value));
+  for (const value of [0, 5, 10]) {
+    assert.equal(await schema.validate(value), value);
   }
-});
-
-test('min and max use text length for string schemas', async () => {
-  const schema = yep.string().label('Código').min(2).max(5);
-
-  assert.equal(await schema.validate('abc'), 'abc');
 
   await assert.rejects(
-    () => schema.validate('ab'),
+    () => schema.validate(-1),
     (error) => {
-      assert.equal(error.message, 'Código debe tener más de 2 caracteres');
+      assert.equal(error.message, 'Edad debe ser mayor o igual a 0');
       return true;
     }
   );
 
   await assert.rejects(
-    () => schema.validate('abcde'),
+    () => schema.validate(11),
     (error) => {
-      assert.equal(error.message, 'Código debe tener menos de 5 caracteres');
+      assert.equal(error.message, 'Edad debe ser menor o igual a 10');
+      return true;
+    }
+  );
+});
+
+test('min and max use text length for string schemas', async () => {
+  const schema = yep.string().label('Código').min(3).max(5);
+
+  for (const value of ['abc', 'abcde']) {
+    assert.equal(await schema.validate(value), value);
+  }
+
+  await assert.rejects(
+    () => schema.validate('ab'),
+    (error) => {
+      assert.equal(error.message, 'Código debe tener al menos 3 caracteres');
+      return true;
+    }
+  );
+
+  await assert.rejects(
+    () => schema.validate('abcdef'),
+    (error) => {
+      assert.equal(error.message, 'Código debe tener como máximo 5 caracteres');
+      return true;
+    }
+  );
+});
+
+test('min and max use date values for date schemas', async () => {
+  const minDate = new Date('2024-01-01T00:00:00.000Z');
+  const maxDate = new Date('2024-01-31T00:00:00.000Z');
+  const schema = yep.date().label('Fecha').min(minDate).max(maxDate);
+
+  const validDate = new Date('2024-01-15T00:00:00.000Z');
+  assert.equal((await schema.validate(validDate)).getTime(), validDate.getTime());
+
+  await assert.rejects(
+    () => schema.validate(new Date('2023-12-31T23:59:59.999Z')),
+    (error) => {
+      assert.equal(error.message, 'Fecha debe ser mayor o igual a 2024-01-01T00:00:00.000Z');
+      return true;
+    }
+  );
+
+  await assert.rejects(
+    () => schema.validate(new Date('2024-02-01T00:00:00.000Z')),
+    (error) => {
+      assert.equal(error.message, 'Fecha debe ser menor o igual a 2024-01-31T00:00:00.000Z');
       return true;
     }
   );

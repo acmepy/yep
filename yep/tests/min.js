@@ -12,10 +12,13 @@ export class Min extends BaseTest {
       return null;
     }
 
-    const comparableValue = typeof value === 'string' ? value.length : value;
-    const isValid = (typeof value === 'string' || typeof value === 'number')
+    const isDateValue = value instanceof Date && !Number.isNaN(value.getTime());
+    const isDateLimit = this.limit instanceof Date && !Number.isNaN(this.limit.getTime());
+    const comparableValue = isDateValue ? value.getTime() : (typeof value === 'string' ? value.length : value);
+    const comparableLimit = isDateLimit ? this.limit.getTime() : this.limit;
+    const isValid = (typeof value === 'string' || typeof value === 'number' || isDateValue)
       && !Number.isNaN(comparableValue)
-      && comparableValue > this.limit;
+      && comparableValue >= comparableLimit;
 
     if (!isValid) {
       const label = schema?.getLabel?.() || this.options.label || this.name;

@@ -1,3 +1,9 @@
+function formatValue(value) {
+  return value instanceof Date && !Number.isNaN(value.getTime())
+    ? value.toISOString()
+    : value;
+}
+
 const messages = {
   required: ({ label }) => `${label} es requerido`,
   nullable: ({ label }) => `${label} no puede ser null`,
@@ -8,11 +14,11 @@ const messages = {
   regex: ({ label }) => `${label} no cumple con el formato esperado`,
   positive: ({ label }) => `${label} debe ser un número mayor a 0`,
   min: ({ label, min, typeName }) => typeName === 'string'
-    ? `${label} debe tener más de ${min} caracteres`
-    : `${label} debe ser mayor a ${min}`,
+    ? `${label} debe tener al menos ${min} caracteres`
+    : `${label} debe ser mayor o igual a ${formatValue(min)}`,
   max: ({ label, max, typeName }) => typeName === 'string'
-    ? `${label} debe tener menos de ${max} caracteres`
-    : `${label} debe ser menor a ${max}`,
+    ? `${label} debe tener como máximo ${max} caracteres`
+    : `${label} debe ser menor o igual a ${formatValue(max)}`,
   default: ({ label }) => `${label} se completó con un valor por defecto`,
   custom: ({ label }) => `${label} no es válido`
 };
