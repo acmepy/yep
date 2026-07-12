@@ -93,6 +93,7 @@ export interface Yep {
   object<TShape extends SchemaShape = SchemaShape>(definition?: TShape): ObjectSchema<TShape>;
   string(): BaseSchema<string>;
   number(): BaseSchema<number>;
+  integer(): BaseSchema<number>;
   boolean(): BaseSchema<boolean>;
   date(): BaseSchema<Date>;
   array(): BaseSchema<unknown[]>;

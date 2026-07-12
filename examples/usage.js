@@ -3,6 +3,7 @@ import yep from 'yep';
 const schema = yep.object().shape({
   nombre: yep.string().label('Nombre').required().min(5).max(20),
   edad: yep.number().label('Edad').required().positive().min(10).max(50),
+  cantidad: yep.integer().label('Cantidad').required().min(1).max(10),
   email: yep.string().email().label('Correo electrónico').nullable(),
   phone: yep.string().label('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/).nullable(),
   estado: yep.string().oneOf(['A', 'I'])
@@ -22,6 +23,7 @@ console.log(5, await schema.validateAt('nombre', { nombre: '' }, { safe: true })
 console.log(6, await schema.validateAt('edad', { edad: 2 }, { safe: true }));
 console.log(7, await schema.validateAt('edad', { edad: 51 }, { safe: true }));
 console.log(8, await schema.validateAt('phone', { phone: "123456a" }, { safe: true }));
+console.log(8.1, await schema.validateAt('cantidad', { cantidad: 2.5 }, { safe: true }));
 const jsonSchema = schema.toJsonSchema()
 console.log(9, jsonSchema);
 

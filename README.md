@@ -42,6 +42,7 @@ console.log(usuario);
 | --- | --- |
 | `yep.string()` | cadenas |
 | `yep.number()` | números, excepto `NaN` |
+| `yep.integer()` | números enteros |
 | `yep.boolean()` | booleanos |
 | `yep.date()` | instancias válidas de `Date` |
 | `yep.array()` | arreglos |
@@ -196,6 +197,7 @@ La conversión implementa un subconjunto de JSON Schema: `type`, objetos con `pr
 yep.object(definition)
 yep.string()
 yep.number()
+yep.integer()
 yep.boolean()
 yep.date()
 yep.array()

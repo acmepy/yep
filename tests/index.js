@@ -9,3 +9,4 @@ import './email.js';
 import './jsonSchema.js';
 import './positive.js';
 import './minMax.js';
+import './integer.js';
