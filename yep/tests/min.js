@@ -8,26 +8,18 @@ export class Min extends BaseTest {
   }
 
   async run(value, schema) {
-    if (value === undefined || value === null) {
-      return null;
-    }
+    if (value === undefined || value === null)  return null;
 
     const isDateValue = value instanceof Date && !Number.isNaN(value.getTime());
     const isDateLimit = this.limit instanceof Date && !Number.isNaN(this.limit.getTime());
     const comparableValue = isDateValue ? value.getTime() : (typeof value === 'string' ? value.length : value);
     const comparableLimit = isDateLimit ? this.limit.getTime() : this.limit;
-    const isValid = (typeof value === 'string' || typeof value === 'number' || isDateValue)
-      && !Number.isNaN(comparableValue)
-      && comparableValue >= comparableLimit;
+    const isValid = (typeof value === 'string' || typeof value === 'number' || isDateValue) && !Number.isNaN(comparableValue) && comparableValue >= comparableLimit;
 
     if (!isValid) {
       const label = schema?.getLabel?.() || this.options.label || this.name;
-      const message = this.options.message?.({ label, min: this.limit })
-        || getMessage('min', { label, min: this.limit, typeName: schema?.typeName });
-      return {
-        message,
-        fieldName: schema?.fieldName || schema?.name || schema?.typeName
-      };
+      const message = this.options.message?.({ label, min: this.limit }) || getMessage('min', { label, min: this.limit, typeName: schema?.typeName });
+      return { message, fieldName: schema?.fieldName || schema?.name || schema?.typeName };
     }
 
     return null;

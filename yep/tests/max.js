@@ -8,9 +8,7 @@ export class Max extends BaseTest {
   }
 
   async run(value, schema) {
-    if (value === undefined || value === null) {
-      return null;
-    }
+    if (value === undefined || value === null) return null;
 
     const isDateValue = value instanceof Date && !Number.isNaN(value.getTime());
     const isDateLimit = this.limit instanceof Date && !Number.isNaN(this.limit.getTime());
@@ -22,8 +20,7 @@ export class Max extends BaseTest {
 
     if (!isValid) {
       const label = schema?.getLabel?.() || this.options.label || this.name;
-      const message = this.options.message?.({ label, max: this.limit })
-        || getMessage('max', { label, max: this.limit, typeName: schema?.typeName });
+      const message = this.options.message?.({ label, max: this.limit }) || getMessage('max', { label, max: this.limit, typeName: schema?.typeName });
       return {
         message,
         fieldName: schema?.fieldName || schema?.name || schema?.typeName

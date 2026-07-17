@@ -12,13 +12,11 @@ export class Custom extends BaseTest {
 
   async run(value, schema, data = {}) {
     const registered = getTest(this.name);
-    if (!registered && !this.fn) {
-      return null;
-    }
+    if (!registered && !this.fn) return null;
+
     const fn = this.fn || registered?.fn;
-    if (!fn) {
-      return null;
-    }
+    if (!fn)  return null;
+
     const ok = await fn(value, schema?.fieldName || schema?.name || schema?.typeName, data, this.options);
     if (!ok) {
       const label = schema?.getLabel?.() || this.options.label || this.name;
