@@ -22,13 +22,13 @@ test('integer accepts only integer numbers', async () => {
 
 test('integer exports and imports JSON Schema integer type', async () => {
   const schema = yep.object({
-    cantidad: yep.integer().required()
+    cantidad: yep.integer().label('Cantidad').required()
   });
 
   assert.deepEqual(schema.toJsonSchema(), {
     type: 'object',
     properties: {
-      cantidad: { type: 'integer' }
+      cantidad: { type: 'integer', title: 'Cantidad' }
     },
     required: ['cantidad']
   });
@@ -36,7 +36,7 @@ test('integer exports and imports JSON Schema integer type', async () => {
   const imported = yep.fromJsonSchema({
     type: 'object',
     properties: {
-      cantidad: { type: 'integer' }
+      cantidad: { type: 'integer', title: 'Cantidad' }
     }
   });
 
@@ -45,3 +45,4 @@ test('integer exports and imports JSON Schema integer type', async () => {
   const result = await imported.validate({ cantidad: 3.14 }, { safe: true });
   assert.equal(result.errors.cantidad, 'Cantidad debe ser de tipo integer');
 });
+

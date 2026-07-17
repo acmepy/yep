@@ -24,22 +24,14 @@ export function toJsonSchema(schema) {
       ? [schema.typeName, 'null']
       : schema.typeName
   };
-  if (schema.defaultValue !== undefined) {
-    jsonSchema.default = schema.defaultValue;
-  }
-  if (schema.oneOfValues) {
-    jsonSchema.oneOf = schema.oneOfValues;
-  }
-  if (schema.notOneOfValues) {
-    jsonSchema.not = { enum: schema.notOneOfValues };
-  }
-  if (schema.regexPattern) {
-    jsonSchema.pattern = schema.regexPattern.source;
-  }
-  if (schema.tests?.some((test) => test.name === 'email')) {
-    jsonSchema.format = 'email';
-  }
+  if (schema.labelText) jsonSchema.title = schema.labelText;
+  if (schema.defaultValue !== undefined) jsonSchema.default = schema.defaultValue;
+  if (schema.oneOfValues) jsonSchema.oneOf = schema.oneOfValues;
+  if (schema.notOneOfValues) jsonSchema.not = { enum: schema.notOneOfValues };
+  if (schema.regexPattern) jsonSchema.pattern = schema.regexPattern.source;
+  if (schema.tests?.some((test) => test.name === 'email')) jsonSchema.format = 'email';
   return jsonSchema;
 }
 
 export default toJsonSchema;
+

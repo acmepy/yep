@@ -7,33 +7,23 @@ function createFieldSchema(schema) {
   const type = createType(typeName) || createType('string');
   const instance = type();
 
-  if (declaredTypes.includes('null')) {
-    instance.nullable();
-  }
-  if (Object.hasOwn(schema, 'default')) {
-    instance.default(schema.default);
-  }
+  if (schema.title) instance.label(schema.title);
+  if (declaredTypes.includes('null')) instance.nullable();
+  if (Object.hasOwn(schema, 'default')) instance.default(schema.default);
   if (schema.oneOf) {
     instance.oneOf(schema.oneOf);
   } else if (schema.enum) {
     instance.oneOf(schema.enum);
   }
-  if (schema.not?.enum) {
-    instance.notOneOf(schema.not.enum);
-  }
-  if (schema.pattern) {
-    instance.regex(new RegExp(schema.pattern));
-  }
-  if (schema.format === 'email') {
-    instance.email();
-  }
-
+  if (schema.not?.enum) instance.notOneOf(schema.not.enum);
+  if (schema.pattern) instance.regex(new RegExp(schema.pattern));
+  if (schema.format === 'email') instance.email();
   return instance;
 }
 
 export function fromJsonSchema(schema) {
   if (!schema || typeof schema !== 'object') {
-    throw new Error('JSON Schema inválido');
+    throw new Error('JSON Schema invÃ¡lido');
   }
 
   if (schema.type === 'object' && schema.properties) {
@@ -41,13 +31,10 @@ export function fromJsonSchema(schema) {
     const shape = Object.fromEntries(
       Object.entries(schema.properties).map(([key, value]) => {
         const instance = createFieldSchema(value);
-        if (required.has(key)) {
-          instance.required();
-        }
+        if (required.has(key)) instance.required();
         return [key, instance];
       })
     );
-
     return new ObjectSchema(shape);
   }
 
@@ -55,3 +42,4 @@ export function fromJsonSchema(schema) {
 }
 
 export default fromJsonSchema;
+

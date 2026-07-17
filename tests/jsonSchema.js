@@ -4,7 +4,7 @@ import yep from '../yep/index.js';
 
 test('toJsonSchema exports supported validation rules', () => {
   const schema = yep.object({
-    name: yep.string().required().default('Ana'),
+    name: yep.string().label('Nombre').required().default('Ana'),
     email: yep.string().nullable().email(),
     status: yep.string().oneOf(['A', 'I']).notOneOf(['X']),
     code: yep.string().regex(/^ABC/)
@@ -13,7 +13,7 @@ test('toJsonSchema exports supported validation rules', () => {
   assert.deepEqual(schema.toJsonSchema(), {
     type: 'object',
     properties: {
-      name: { type: 'string', default: 'Ana' },
+      name: { type: 'string', title: 'Nombre', default: 'Ana' },
       email: { type: ['string', 'null'], format: 'email' },
       status: { type: 'string', oneOf: ['A', 'I'], not: { enum: ['X'] } },
       code: { type: 'string', pattern: '^ABC' }
@@ -26,7 +26,7 @@ test('fromJsonSchema imports supported validation rules', async () => {
   const schema = yep.fromJsonSchema({
     type: 'object',
     properties: {
-      name: { type: 'string', default: 'Ana' },
+      name: { type: 'string', title: 'Nombre', default: 'Ana' },
       email: { type: ['string', 'null'], format: 'email' },
       status: { type: 'string', oneOf: ['A', 'I'], not: { enum: ['X'] } },
       code: { type: 'string', pattern: '^ABC' }
@@ -42,3 +42,4 @@ test('fromJsonSchema imports supported validation rules', async () => {
   const result = await schema.validate({ code: 'invalid' }, { safe: true });
   assert.match(result.errors.code, /formato esperado/);
 });
+

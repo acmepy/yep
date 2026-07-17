@@ -28,6 +28,7 @@ export type TestFunction<T = unknown> = (
 
 export interface JsonSchema {
   type?: string | string[];
+  title?: string;
   properties?: Record<string, JsonSchema>;
   required?: string[];
   oneOf?: unknown[];
@@ -58,7 +59,7 @@ export interface BaseSchema<T = unknown> {
   validate(value: unknown, data?: Record<string, unknown>): Promise<T | null | undefined>;
   toJsonSchema(): JsonSchema;
 
-  // Los tests registrados con yep.addTest() se agregan dinámicamente.
+  // Los tests registrados con yep.addTest() se agregan dinÃ¡micamente.
   [testName: string]: any;
 }
 
@@ -116,3 +117,4 @@ export interface Yep {
 declare const yep: Yep;
 
 export default yep;
+
