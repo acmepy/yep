@@ -5,22 +5,22 @@ function formatValue(value) {
 }
 
 const messages = {
-  required: ({ label }) => `${label} es requerido`,
-  nullable: ({ label }) => `${label} no puede ser null`,
-  type: ({ label, typeName }) => `${label} debe ser de tipo ${typeName}`,
-  oneOf: ({ label }) => `${label} debe ser uno de los valores permitidos`,
-  notOneOf: ({ label }) => `${label} no puede ser uno de los valores permitidos`,
-  requiredOneOf: ({ labels }) => `Debe completar al menos uno de los campos: ${labels.join(', ')}`,
-  regex: ({ label }) => `${label} no cumple con el formato esperado`,
-  positive: ({ label }) => `${label} debe ser un número mayor a 0`,
-  min: ({ label, min, typeName }) => typeName === 'string'
-    ? `${label} debe tener al menos ${min} caracteres`
-    : `${label} debe ser mayor o igual a ${formatValue(min)}`,
-  max: ({ label, max, typeName }) => typeName === 'string'
-    ? `${label} debe tener como máximo ${max} caracteres`
-    : `${label} debe ser menor o igual a ${formatValue(max)}`,
-  default: ({ label }) => `${label} se completó con un valor por defecto`,
-  custom: ({ label }) => `${label} no es válido`
+  required: ({ title }) => `${title} es requerido`,
+  nullable: ({ title }) => `${title} no puede ser null`,
+  type: ({ title, typeName }) => `${title} debe ser de tipo ${typeName}`,
+  oneOf: ({ title }) => `${title} debe ser uno de los valores permitidos`,
+  notOneOf: ({ title }) => `${title} no puede ser uno de los valores permitidos`,
+  requiredOneOf: ({ titles }) => `Debe completar al menos uno de los campos: ${titles.join(', ')}`,
+  regex: ({ title }) => `${title} no cumple con el formato esperado`,
+  positive: ({ title }) => `${title} debe ser un número mayor a 0`,
+  min: ({ title, min, typeName }) => typeName === 'string'
+    ? `${title} debe tener al menos ${min} caracteres`
+    : `${title} debe ser mayor o igual a ${formatValue(min)}`,
+  max: ({ title, max, typeName }) => typeName === 'string'
+    ? `${title} debe tener como máximo ${max} caracteres`
+    : `${title} debe ser menor o igual a ${formatValue(max)}`,
+  default: ({ title }) => `${title} se completó con un valor por defecto`,
+  custom: ({ title }) => `${title} no es válido`
 };
 
 export function getMessage(key, params = {}) {

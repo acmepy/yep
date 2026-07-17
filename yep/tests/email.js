@@ -7,11 +7,11 @@ export class Email extends BaseTest {
   }
 
   async run(value, schema) {
-    const label = schema?.getLabel?.() || this.options.label || this.name;
+    const title = schema?.getLabel?.() || this.options.title || this.name;
     if (value !== undefined && value !== null && typeof value === 'string') {
       const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
       if (!isValid) {
-        const message = this.options.message?.({ label }) || `${label} no tiene un formato de correo válido`;
+        const message = this.options.message?.({ title }) || `${title} no tiene un formato de correo válido`;
         return { message, fieldName: schema?.fieldName || schema?.name || schema?.typeName };
       }
     }

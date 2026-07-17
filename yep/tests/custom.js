@@ -19,8 +19,8 @@ export class Custom extends BaseTest {
 
     const ok = await fn(value, schema?.fieldName || schema?.name || schema?.typeName, data, this.options);
     if (!ok) {
-      const label = schema?.getLabel?.() || this.options.label || this.name;
-      return { message: this.options.message?.({ label }) || getMessage('custom', { label }), fieldName: schema?.fieldName || schema?.name || schema?.typeName };
+      const title = schema?.getLabel?.() || this.options.title || this.name;
+      return { message: this.options.message?.({ title }) || getMessage('custom', { title }), fieldName: schema?.fieldName || schema?.name || schema?.typeName };
     }
     return null;
   }

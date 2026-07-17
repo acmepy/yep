@@ -18,9 +18,9 @@ El proyecto todavÃƒÆ’Ã‚Â­a no define un punto de entrada publicable en
 import yep from 'yep';
 
 const usuarioSchema = yep.object({
-  nombre: yep.string().label('Nombre').required(),
-  edad: yep.number().label('Edad'),
-  email: yep.string().label('Correo').email(),
+  nombre: yep.string().title('Nombre').required(),
+  edad: yep.number().title('Edad'),
+  email: yep.string().title('Correo').email(),
   estado: yep.string().oneOf(['A', 'I']).default('A')
 });
 
@@ -51,7 +51,7 @@ console.log(usuario);
 
 Los tipos de campo comparten estos mÃƒÆ’Ã‚Â©todos encadenables:
 
-- `.label(texto)`: nombre legible usado en los mensajes de error; al exportar a JSON Schema se serializa como `title`.
+- `.title(texto)`: nombre legible usado en los mensajes de error; al exportar a JSON Schema se serializa como `title`.
 - `.required()`: rechaza `undefined` y cadenas vacÃƒÆ’Ã‚Â­as (`''`).
 - `.nullable()`: permite `null`.
 - `.default(valor)`: usa un valor por defecto cuando el campo es `undefined`.
@@ -132,8 +132,8 @@ Si el campo no existe en el esquema, `validateAt` devuelve `undefined`.
 
 ```js
 const contactoSchema = yep.object({
-  email: yep.string().label('Correo').email(),
-  telefono: yep.string().label('TelÃƒÆ’Ã‚Â©fono')
+  email: yep.string().title('Correo').email(),
+  telefono: yep.string().title('TelÃƒÆ’Ã‚Â©fono')
 }).requiredOneOf(['email', 'telefono']);
 
 await contactoSchema.validate({ telefono: '0981000000' });
@@ -161,18 +161,18 @@ yep.addTest(
   'ruc',
   (value) => /^\d+-\d$/.test(value),
   {
-    message: ({ label }) => `${label} no tiene un formato vÃƒÆ’Ã‚Â¡lido`
+    message: ({ title }) => `${title} no tiene un formato vÃƒÆ’Ã‚Â¡lido`
   }
 );
 
 const schema = yep.object({
-  ruc: yep.string().label('RUC').ruc()
+  ruc: yep.string().title('RUC').ruc()
 });
 
 await schema.validate({ ruc: '123-4' });
 ```
 
-La opciÃƒÆ’Ã‚Â³n `message` puede ser una funciÃƒÆ’Ã‚Â³n que recibe `{ label }`. Si se omite, se usa el mensaje genÃƒÆ’Ã‚Â©rico de validaciÃƒÆ’Ã‚Â³n personalizada.
+La opciÃƒÆ’Ã‚Â³n `message` puede ser una funciÃƒÆ’Ã‚Â³n que recibe `{ title }`. Si se omite, se usa el mensaje genÃƒÆ’Ã‚Â©rico de validaciÃƒÆ’Ã‚Â³n personalizada.
 
 ## ConversiÃƒÆ’Ã‚Â³n desde y hacia JSON Schema
 
@@ -189,9 +189,9 @@ const schema = yep.fromJsonSchema({
 });
 ```
 
-La conversiÃƒÂ³n implementa un subconjunto de JSON Schema: `type`, `title`, objetos con `properties`, `required`, tipos anulables, `default`, `oneOf`, `not.enum`, `pattern` y el formato `email`. `title` se importa/exporta como el `label` del campo. Los tests personalizados y `requiredOneOf` no se conservan porque no tienen una representaciÃƒÂ³n JSON Schema equivalente directa.
+La conversiÃƒÂ³n implementa un subconjunto de JSON Schema: `type`, `title`, objetos con `properties`, `required`, tipos anulables, `default`, `oneOf`, `not.enum`, `pattern` y el formato `email`. `title` se importa/exporta como el `title` del campo. Los tests personalizados y `requiredOneOf` no se conservan porque no tienen una representaciÃƒÂ³n JSON Schema equivalente directa.
 equired, tipos anulables, default, oneOf, 
-ot.enum, pattern y el formato email. 	itle se importa/exporta como el label del campo. Los tests personalizados y 
+ot.enum, pattern y el formato email. 	itle se importa/exporta como el title del campo. Los tests personalizados y 
 equiredOneOf no se conservan porque no tienen una representaciÃƒÆ’Ã‚Â³n JSON Schema equivalente directa.
 
 ## API resumida

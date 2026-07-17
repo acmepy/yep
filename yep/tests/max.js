@@ -19,8 +19,8 @@ export class Max extends BaseTest {
       && comparableValue <= comparableLimit;
 
     if (!isValid) {
-      const label = schema?.getLabel?.() || this.options.label || this.name;
-      const message = this.options.message?.({ label, max: this.limit }) || getMessage('max', { label, max: this.limit, typeName: schema?.typeName });
+      const title = schema?.getLabel?.() || this.options.title || this.name;
+      const message = this.options.message?.({ title, max: this.limit }) || getMessage('max', { title, max: this.limit, typeName: schema?.typeName });
       return {
         message,
         fieldName: schema?.fieldName || schema?.name || schema?.typeName

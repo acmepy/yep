@@ -14,9 +14,9 @@ export class Regex extends BaseTest {
   }
 
   async run(value, schema) {
-    const label = schema?.getLabel?.() || this.options.label || this.name;
+    const title = schema?.getLabel?.() || this.options.title || this.name;
     if (value !== undefined && value !== null && this.pattern && !this.pattern.test(value)) {
-      return { message: getMessage('regex', { label }), fieldName: schema?.fieldName || schema?.name || schema?.typeName };
+      return { message: getMessage('regex', { title }), fieldName: schema?.fieldName || schema?.name || schema?.typeName };
     }
     return null;
   }

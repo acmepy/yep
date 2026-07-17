@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import yep from '../yep/index.js';
 
 test('integer accepts only integer numbers', async () => {
-  const schema = yep.integer().label('Cantidad');
+  const schema = yep.integer().title('Cantidad');
 
   for (const value of [0, 1, -10, Number.MAX_SAFE_INTEGER]) {
     assert.equal(await schema.validate(value), value);
@@ -22,7 +22,7 @@ test('integer accepts only integer numbers', async () => {
 
 test('integer exports and imports JSON Schema integer type', async () => {
   const schema = yep.object({
-    cantidad: yep.integer().label('Cantidad').required()
+    cantidad: yep.integer().title('Cantidad').required()
   });
 
   assert.deepEqual(schema.toJsonSchema(), {

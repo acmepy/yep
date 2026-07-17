@@ -4,7 +4,7 @@ import yep from '../yep/index.js';
 
 test('regex validates pattern', async () => {
   const schema = yep.object().shape({
-    ruc: yep.string().label('RUC').regex(/^\d+-\d$/)
+    ruc: yep.string().title('RUC').regex(/^\d+-\d$/)
   });
 
   const result = await schema.validate({ ruc: '123-4' });
@@ -13,7 +13,7 @@ test('regex validates pattern', async () => {
 
 test('regex rejects invalid pattern', async () => {
   const schema = yep.object().shape({
-    ruc: yep.string().label('RUC').regex(/^\d+-\d$/)
+    ruc: yep.string().title('RUC').regex(/^\d+-\d$/)
   });
 
   await assert.rejects(
@@ -27,7 +27,7 @@ test('regex rejects invalid pattern', async () => {
 
 test('matches validates using a regular expression', async () => {
   const schema = yep.string()
-    .label('Teléfono')
+    .title('Teléfono')
     .matches(/^\d{3}-\d{3}-\d{4}$/)
     .nullable();
 

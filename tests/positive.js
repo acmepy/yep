@@ -9,7 +9,7 @@ test('positive accepts numbers greater than zero', async () => {
 });
 
 test('positive rejects zero, negative and non-numeric values', async () => {
-  const schema = yep.number().label('Monto').positive();
+  const schema = yep.number().title('Monto').positive();
 
   for (const value of [0, -1, '1', Number.NaN]) {
     await assert.rejects(

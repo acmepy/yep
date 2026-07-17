@@ -12,9 +12,9 @@ export class OneOf extends BaseTest {
   }
 
   async run(value, schema) {
-    const label = schema?.getLabel?.() || this.options.label || this.name;
+    const title = schema?.getLabel?.() || this.options.title || this.name;
     if (value !== undefined && value !== null && this.values !== undefined && !this.values.includes(value)) {
-      return { message: getMessage('oneOf', { label }), fieldName: schema?.fieldName || schema?.name || schema?.typeName };
+      return { message: getMessage('oneOf', { title }), fieldName: schema?.fieldName || schema?.name || schema?.typeName };
     }
     return null;
   }

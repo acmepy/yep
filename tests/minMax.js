@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import yep from '../yep/index.js';
 
 test('min and max use numeric values for number schemas', async () => {
-  const schema = yep.number().label('Edad').min(0).max(10);
+  const schema = yep.number().title('Edad').min(0).max(10);
 
   for (const value of [0, 5, 10]) {
     assert.equal(await schema.validate(value), value);
@@ -27,7 +27,7 @@ test('min and max use numeric values for number schemas', async () => {
 });
 
 test('min and max use text length for string schemas', async () => {
-  const schema = yep.string().label('Código').min(3).max(5);
+  const schema = yep.string().title('Código').min(3).max(5);
 
   for (const value of ['abc', 'abcde']) {
     assert.equal(await schema.validate(value), value);
@@ -53,7 +53,7 @@ test('min and max use text length for string schemas', async () => {
 test('min and max use date values for date schemas', async () => {
   const minDate = new Date('2024-01-01T00:00:00.000Z');
   const maxDate = new Date('2024-01-31T00:00:00.000Z');
-  const schema = yep.date().label('Fecha').min(minDate).max(maxDate);
+  const schema = yep.date().title('Fecha').min(minDate).max(maxDate);
 
   const validDate = new Date('2024-01-15T00:00:00.000Z');
   assert.equal((await schema.validate(validDate)).getTime(), validDate.getTime());
@@ -76,7 +76,7 @@ test('min and max use date values for date schemas', async () => {
 });
 
 test('between uses first value as min and second value as max', async () => {
-  const schema = yep.number().label('Edad').between(18, 65);
+  const schema = yep.number().title('Edad').between(18, 65);
 
   for (const value of [18, 30, 65]) {
     assert.equal(await schema.validate(value), value);

@@ -4,7 +4,7 @@ import yep from '../yep/index.js';
 
 test('email validates basic email format', async () => {
   const schema = yep.object().shape({
-    email: yep.string().label('Email').email()
+    email: yep.string().title('Email').email()
   });
 
   const valid = await schema.validate({ email: 'test@example.com' });
@@ -13,7 +13,7 @@ test('email validates basic email format', async () => {
 
 test('email rejects invalid email format', async () => {
   const schema = yep.object().shape({
-    email: yep.string().label('Email').email()
+    email: yep.string().title('Email').email()
   });
 
   await assert.rejects(

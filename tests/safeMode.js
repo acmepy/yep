@@ -4,8 +4,8 @@ import yep from '../yep/index.js';
 
 test('validate supports safe mode without throwing', async () => {
   const schema = yep.object().shape({
-    nombre: yep.string().label('Nombre').required(),
-    edad: yep.number().label('Edad')
+    nombre: yep.string().title('Nombre').required(),
+    edad: yep.number().title('Edad')
   });
 
   const result = await schema.validate({ edad: 'x' }, { safe: true });
@@ -16,7 +16,7 @@ test('validate supports safe mode without throwing', async () => {
 
 test('validateAt supports safe mode without throwing', async () => {
   const schema = yep.object().shape({
-    nombre: yep.string().label('Nombre').required()
+    nombre: yep.string().title('Nombre').required()
   });
 
   const result = await schema.validateAt('nombre', {}, { safe: true });

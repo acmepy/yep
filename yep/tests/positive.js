@@ -12,8 +12,8 @@ export class Positive extends BaseTest {
     const isPositiveNumber = typeof value === 'number' && !Number.isNaN(value) && value > 0;
 
     if (!isPositiveNumber) {
-      const label = schema?.getLabel?.() || this.options.label || this.name;
-      const message = this.options.message?.({ label }) || getMessage('positive', { label });
+      const title = schema?.getLabel?.() || this.options.title || this.name;
+      const message = this.options.message?.({ title }) || getMessage('positive', { title });
       return { message, fieldName: schema?.fieldName || schema?.name || schema?.typeName };
     }
 

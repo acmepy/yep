@@ -17,8 +17,8 @@ export class Min extends BaseTest {
     const isValid = (typeof value === 'string' || typeof value === 'number' || isDateValue) && !Number.isNaN(comparableValue) && comparableValue >= comparableLimit;
 
     if (!isValid) {
-      const label = schema?.getLabel?.() || this.options.label || this.name;
-      const message = this.options.message?.({ label, min: this.limit }) || getMessage('min', { label, min: this.limit, typeName: schema?.typeName });
+      const title = schema?.getLabel?.() || this.options.title || this.name;
+      const message = this.options.message?.({ title, min: this.limit }) || getMessage('min', { title, min: this.limit, typeName: schema?.typeName });
       return { message, fieldName: schema?.fieldName || schema?.name || schema?.typeName };
     }
 

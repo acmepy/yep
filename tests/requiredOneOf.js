@@ -4,8 +4,8 @@ import yep from '../yep/index.js';
 
 test('requiredOneOf validates one of several fields', async () => {
   const schema = yep.object().shape({
-    email: yep.string().label('Email'),
-    telefono: yep.string().label('Teléfono')
+    email: yep.string().title('Email'),
+    telefono: yep.string().title('Teléfono')
   }).requiredOneOf(['email', 'telefono']);
 
   await assert.rejects(

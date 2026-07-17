@@ -4,7 +4,7 @@ import yep from '../yep/index.js';
 
 test('required validates missing values', async () => {
   const schema = yep.object().shape({
-    nombre: yep.string().label('Nombre').required()
+    nombre: yep.string().title('Nombre').required()
   });
 
   await assert.rejects(
@@ -19,7 +19,7 @@ test('required validates missing values', async () => {
 
 test('required rejects empty strings', async () => {
   const schema = yep.object({
-    nombre: yep.string().label('Nombre').required()
+    nombre: yep.string().title('Nombre').required()
   });
 
   await assert.rejects(

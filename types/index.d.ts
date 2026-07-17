@@ -10,11 +10,11 @@ export interface ValidationOptions {
 }
 
 export interface TestMessageContext {
-  label: string;
+  title: string;
 }
 
 export interface TestOptions {
-  label?: string;
+  title?: string;
   message?: (context: TestMessageContext) => string;
   [key: string]: unknown;
 }
@@ -42,7 +42,7 @@ export interface JsonSchema {
 
 export interface BaseSchema<T = unknown> {
   readonly typeName: string;
-  label(text: string): this;
+  title(text: string): this;
   required(options?: TestOptions): this;
   nullable(options?: TestOptions): BaseSchema<T | null>;
   default(value: T): this;

@@ -7,7 +7,7 @@ import { toJsonSchema } from '../json-schema/toJsonSchema.js';
 export default class BaseType {
   constructor(typeName, options = {}) {
     this.typeName = typeName;
-    this.labelText = '';
+    this.titleText = '';
     this.fieldName = '';
     this.requiredFlag = false;
     this.nullableFlag = false;
@@ -20,8 +20,8 @@ export default class BaseType {
     this.options = options;
   }
 
-  label(label) {
-    this.labelText = label;
+  title(title) {
+    this.titleText = title;
     return this;
   }
 
@@ -37,11 +37,11 @@ export default class BaseType {
   }
 
   getLabel() {
-    return this.labelText || this.fieldName || this.typeName;
+    return this.titleText || this.fieldName || this.typeName;
   }
 
   async validate(value, data = {}) {
-    const label = this.getLabel();
+    const title = this.getLabel();
     const fieldName = this.fieldName || this.name || this.typeName;
     const issues = [];
 
@@ -64,11 +64,11 @@ export default class BaseType {
       if (this.nullableFlag) {
         return null;
       }
-      issues.push(getMessage('type', { label, typeName: this.typeName }));
+      issues.push(getMessage('type', { title, typeName: this.typeName }));
     }
 
     if (value !== undefined && value !== null && !this.isValidType(value)) {
-      issues.push(getMessage('type', { label, typeName: this.typeName }));
+      issues.push(getMessage('type', { title, typeName: this.typeName }));
     }
 
     const testIssues = await this.runTests(value, data, { skipRequired: value === undefined });

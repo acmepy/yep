@@ -1,11 +1,11 @@
 import yep from 'yep';
 
 const schema = yep.object().shape({
-  nombre: yep.string().label('Nombre').required().min(5).max(20),
-  edad: yep.number().label('Edad').required().positive().min(10).max(50),
-  cantidad: yep.integer().label('Cantidad').required().min(1).max(10),
-  email: yep.string().email().label('Correo electrónico').nullable(),
-  phone: yep.string().label('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/).nullable(),
+  nombre: yep.string().title('Nombre').required().min(5).max(20),
+  edad: yep.number().title('Edad').required().positive().min(10).max(50),
+  cantidad: yep.integer().title('Cantidad').required().min(1).max(10),
+  email: yep.string().email().title('Correo electrónico').nullable(),
+  phone: yep.string().title('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/).nullable(),
   estado: yep.string().oneOf(['A', 'I'])
 });
 
@@ -31,18 +31,18 @@ const schema2= yep.fromJsonSchema(jsonSchema);
 console.log(10, await schema2.validate({ nombre: 'Juan' }, {safe: true}));
 
 yep.addTest('ruc', (value) => /^\d+-\d$/.test(value), {
-  message: ({ label }) => `${label} no tiene un formato válido`
+  message: ({ title }) => `${title} no tiene un formato válido`
 });
 
 const rucSchema = yep.object().shape({
-  ruc: yep.string().label('RUC').ruc()
+  ruc: yep.string().title('RUC').ruc()
 });
 
 console.log(11, await rucSchema.validate({ ruc: '123' }, {safe: true}));
 
 const contactSchema = yep.object({
-  email: yep.string().label('Correo electrónico').email(),
-  phone: yep.string().label('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/)
+  email: yep.string().title('Correo electrónico').email(),
+  phone: yep.string().title('Teléfono').matches(/^\d{3}-\d{3}-\d{4}$/)
 }).requiredOneOf(['email', 'phone']);
 
 console.log(12, await contactSchema.validate({ phone: '123-456-7890' }));

@@ -4,7 +4,7 @@ import yep from '../yep/index.js';
 
 test('toJsonSchema exports supported validation rules', () => {
   const schema = yep.object({
-    name: yep.string().label('Nombre').required().default('Ana'),
+    name: yep.string().title('Nombre').required().default('Ana'),
     email: yep.string().nullable().email(),
     status: yep.string().oneOf(['A', 'I']).notOneOf(['X']),
     code: yep.string().regex(/^ABC/)

@@ -7,7 +7,7 @@ function createFieldSchema(schema) {
   const type = createType(typeName) || createType('string');
   const instance = type();
 
-  if (schema.title) instance.label(schema.title);
+  if (schema.title) instance.title(schema.title);
   if (declaredTypes.includes('null')) instance.nullable();
   if (Object.hasOwn(schema, 'default')) instance.default(schema.default);
   if (schema.oneOf) {

@@ -39,8 +39,8 @@ export default class ObjectSchema {
         continue;
       }
       schema.fieldName = key;
-      if (!schema.labelText) {
-        schema.labelText = humanizeLabel(key);
+      if (!schema.titleText) {
+        schema.titleText = humanizeLabel(key);
       }
       try {
         const validated = await schema.validate(value, data);
@@ -96,8 +96,8 @@ export default class ObjectSchema {
     }
 
     schema.fieldName = field;
-    if (!schema.labelText) {
-      schema.labelText = humanizeLabel(field);
+    if (!schema.titleText) {
+      schema.titleText = humanizeLabel(field);
     }
 
     try {

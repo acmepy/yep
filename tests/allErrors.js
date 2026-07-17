@@ -4,9 +4,9 @@ import yep from '../yep/index.js';
 
 test('validate collects multiple field errors in one run', async () => {
   const schema = yep.object().shape({
-    nombre: yep.string().label('Nombre').required(),
-    edad: yep.number().label('Edad'),
-    estado: yep.string().label('Estado').oneOf(['A', 'I']).regex(/^[A-Z]+$/)
+    nombre: yep.string().title('Nombre').required(),
+    edad: yep.number().title('Edad'),
+    estado: yep.string().title('Estado').oneOf(['A', 'I']).regex(/^[A-Z]+$/)
   });
 
   await assert.rejects(
