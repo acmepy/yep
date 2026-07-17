@@ -9,3 +9,4 @@ export { Email } from './email.js';
 export { Positive } from './positive.js';
 export { Min } from './min.js';
 export { Max } from './max.js';
+export { Between } from './between.js';

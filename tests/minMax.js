@@ -74,3 +74,27 @@ test('min and max use date values for date schemas', async () => {
     }
   );
 });
+
+test('between uses first value as min and second value as max', async () => {
+  const schema = yep.number().label('Edad').between(18, 65);
+
+  for (const value of [18, 30, 65]) {
+    assert.equal(await schema.validate(value), value);
+  }
+
+  await assert.rejects(
+    () => schema.validate(17),
+    (error) => {
+      assert.equal(error.message, 'Edad debe ser mayor o igual a 18');
+      return true;
+    }
+  );
+
+  await assert.rejects(
+    () => schema.validate(66),
+    (error) => {
+      assert.equal(error.message, 'Edad debe ser menor o igual a 65');
+      return true;
+    }
+  );
+});
