@@ -48,6 +48,7 @@ export interface BaseSchema<T = unknown> {
   default(value: T): this;
   oneOf(values: readonly T[], options?: TestOptions): this;
   notOneOf(values: readonly T[], options?: TestOptions): this;
+  'in'(values: readonly T[], options?: TestOptions): this;
   regex(pattern: RegExp, options?: TestOptions): this;
   matches(pattern: RegExp, options?: TestOptions): this;
   email(options?: TestOptions): this;

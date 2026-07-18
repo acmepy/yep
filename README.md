@@ -57,12 +57,14 @@ Los tipos de campo comparten estos mÃƒÆ’Ã‚Â©todos encadenables:
 - `.default(valor)`: usa un valor por defecto cuando el campo es `undefined`.
 - `.oneOf(valores)`: acepta ÃƒÆ’Ã‚Âºnicamente los valores indicados.
 - `.notOneOf(valores)`: rechaza los valores indicados.
+- `.in(valores)`: alias de `.oneOf(valores)`.
 - `.regex(expresion)`: valida el valor con una expresiÃƒÆ’Ã‚Â³n regular.
 - `.matches(expresion)`: alias de `.regex()`.
 - `.email()`: valida un formato bÃƒÆ’Ã‚Â¡sico de correo electrÃƒÆ’Ã‚Â³nico.
 - `.positive()`: acepta ÃƒÆ’Ã‚Âºnicamente nÃƒÆ’Ã‚Âºmeros mayores que `0`.
 - `.min(lÃƒÆ’Ã‚Â­mite)`: exige un nÃƒÆ’Ã‚Âºmero mayor al lÃƒÆ’Ã‚Â­mite o un texto con mÃƒÆ’Ã‚Â¡s caracteres que el lÃƒÆ’Ã‚Â­mite.
 - `.max(lÃƒÆ’Ã‚Â­mite)`: exige un nÃƒÆ’Ã‚Âºmero menor al lÃƒÆ’Ã‚Â­mite o un texto con menos caracteres que el lÃƒÆ’Ã‚Â­mite.
+- `.between(min, max)`: exige que el nÃƒÆ’Ã‚Âºmero, fecha o longitud de texto quede dentro del rango indicado.
 
 Las validaciones son asÃƒÆ’Ã‚Â­ncronas, por lo que `validate` y `validateAt` siempre deben usarse con `await`.
 

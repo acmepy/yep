@@ -2,6 +2,7 @@ export { Required } from './required.js';
 export { Nullable } from './nullable.js';
 export { OneOf } from './oneOf.js';
 export { NotOneOf } from './notOneOf.js';
+export { In } from './in.js';
 export { Regex } from './regex.js';
 export { RequiredOneOf } from './requiredOneOf.js';
 export { Custom } from './custom.js';
